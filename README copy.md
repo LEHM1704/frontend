@@ -1,4 +1,4 @@
-# 🍽️ Sistema de Gestión de Restaurante (POS)
+# Sistema de Gestión de Restaurante (POS)
 
 Este proyecto es una solución completa Fullstack para la administración de un restaurante. Incluye gestión de inventario, categorías y un Punto de Venta (POS) transaccional con control de stock en tiempo real.
 
@@ -6,7 +6,7 @@ Construido siguiendo estándares de arquitectura profesional por capas y princip
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ### Backend (API RESTful)
 
@@ -27,7 +27,7 @@ Construido siguiendo estándares de arquitectura profesional por capas y princip
 
 ---
 
-## 🛠️ Guía de Instalación
+## Guía de Instalación
 
 Sigue estos pasos para desplegar el proyecto en tu entorno local.
 
@@ -65,8 +65,8 @@ Sigue estos pasos para desplegar el proyecto en tu entorno local.
     ```typescript
     export const environment = {
       production: false,
-      apiUrl: "http://localhost:8080/proyecto_final/backend/public",
-      apiKey: "QldyQdarVjmFlSGH",
+      apiUrl: 'http://localhost:8080/proyecto_final/backend/public',
+      apiKey: 'QldyQdarVjmFlSGH',
     };
     ```
 4.  Iniciar el servidor de desarrollo:
@@ -76,7 +76,7 @@ Sigue estos pasos para desplegar el proyecto en tu entorno local.
 
 ---
 
-## 📖 Manual de Uso
+## Manual de Uso
 
 ### Credenciales de Acceso
 
@@ -111,7 +111,7 @@ Sistema de login seguro que valida credenciales contra hash (Bcrypt) y protege l
 
 ---
 
-## 📡 Endpoints Principales (API Reference)
+## Endpoints Principales (API Reference)
 
 Todas las peticiones requieren el Header: `API-KEY: clave_secreta_restaurante_123`
 
@@ -125,7 +125,7 @@ Todas las peticiones requieren el Header: `API-KEY: clave_secreta_restaurante_12
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 /proyecto_final
