@@ -7,9 +7,10 @@ import { ProductsComponent } from './pages/products-component/products-component
 import { Toolbar } from 'primeng/toolbar';
 import { SharedModule } from '../../shared/shared-module';
 import { CategoriasComponent } from './pages/categorias-component/categorias-component';
+import { PosComponent } from './pages/pos-component/pos-component';
 
 @NgModule({
-  declarations: [ProductsComponent, CategoriasComponent],
+  declarations: [ProductsComponent, CategoriasComponent, PosComponent],
   imports: [CommonModule, DashboardRoutingModule, Toolbar, SharedModule],
 })
 export class DashboardModule {}

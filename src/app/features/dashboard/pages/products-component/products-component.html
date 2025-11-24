@@ -7,6 +7,14 @@
         </ng-template>
 
         <ng-template pTemplate="right">
+            <button pButton pRipple label="Categorías" icon="pi pi-tags" 
+                class="p-button-info mr-2" 
+                routerLink="/admin/categorias">
+        </button>
+            <button pButton pRipple label="Ir a Caja (POS)" icon="pi pi-shopping-cart" 
+                class="p-button-help mr-2" 
+                routerLink="/admin/pos">
+        </button>
             <button pButton pRipple icon="pi pi-refresh" class="p-button-help" (click)="loadProducts()" pTooltip="Recargar"></button>
             <button pButton pRipple label="Salir" icon="pi pi-power-off" class="p-button-danger p-button-outlined" (click)="logout()"></button>
         </ng-template>
