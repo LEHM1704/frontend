@@ -1,0 +1,46 @@
+<div class="flex items-center justify-center min-h-screen bg-slate-100 px-4">
+    
+    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+        
+        <div class="text-center mb-8">
+            <i class="pi pi-user text-4xl text-blue-600 mb-2"></i>
+            <h1 class="text-2xl font-bold text-slate-800">Iniciar Sesión</h1>
+            <p class="text-slate-500">Sistema de Restaurante</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
+            
+            <div class="flex flex-col gap-2">
+                <label for="email" class="font-semibold text-slate-700">Correo Electrónico</label>
+                <span class="p-input-icon-left w-full">
+                    <i class="pi pi-envelope"></i>
+                    <input pInputText id="email" formControlName="email" placeholder="admin@restaurant.pe" class="w-full" />
+                </span>
+                <small *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.invalid" class="text-red-500">
+                    Ingresa un correo válido.
+                </small>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label for="password" class="font-semibold text-slate-700">Contraseña</label>
+                <span class="p-input-icon-left w-full">
+                    <i class="pi pi-lock"></i>
+                    <input pInputText type="password" id="password" formControlName="password" placeholder="••••••" class="w-full" />
+                </span>
+                <small *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.invalid" class="text-red-500">
+                    La contraseña es obligatoria.
+                </small>
+            </div>
+
+            <p-button label="INGRESAR" type="submit" [loading]="loading" styleClass="w-full p-button-lg"></p-button>
+
+        </form>
+        
+        <div class="mt-6 text-center text-sm text-slate-400">
+            &copy; 2025 Restaurante Backend Project
+        </div>
+    </div>
+
+</div>
+
+<p-toast position="top-center"></p-toast>

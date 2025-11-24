@@ -1,0 +1,109 @@
+<div class="card p-4 bg-white m-4 rounded shadow-sm">
+    
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <h2 class="text-2xl font-bold m-0 mr-4 text-slate-700">Productos</h2>
+            <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple icon="pi pi-refresh" class="p-button-help" (click)="loadProducts()" pTooltip="Recargar"></button>
+            <button pButton pRipple label="Salir" icon="pi pi-power-off" class="p-button-danger p-button-outlined" (click)="logout()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="products" [rows]="10" [paginator]="true" [loading]="loading"
+             [globalFilterFields]="['nombre','categoria_nombre']"
+             responsiveLayout="scroll" [rowHover]="true" dataKey="id"
+             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} productos" 
+             [showCurrentPageReport]="true">
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                <th>Imagen</th>
+                <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+                <th pSortableColumn="categoria_nombre">Categoría <p-sortIcon field="categoria_nombre"></p-sortIcon></th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td class="font-bold">{{product.nombre}}</td>
+                <td>
+                    <img [src]="product.imagen_url || 'https://placehold.co/100x100?text=Sin+Foto'" 
+                         [alt]="product.nombre" width="50" class="shadow-2 rounded" />
+                </td>
+                <td>S/ {{product.precio | number:'1.2-2'}}</td>
+                <td>
+                    <span [class]="'px-2 py-1 rounded text-white text-xs ' + (product.stock > 5 ? 'bg-green-500' : 'bg-red-500')">
+                        {{product.stock}}
+                    </span>
+                </td>
+                <td>{{product.categoria_nombre || 'General'}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Detalles del Producto" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        
+        <div class="field mb-3">
+            <label for="name">Nombre</label>
+            <input type="text" pInputText id="name" [(ngModel)]="product.nombre" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.nombre">El nombre es obligatorio.</small>
+        </div>
+
+        <div class="field mb-3">
+    <label class="mb-2 block font-bold">Categoría</label>
+    <p-select 
+        [options]="categorias" 
+        [(ngModel)]="product.categoria_id" 
+        optionLabel="nombre" 
+        optionValue="id" 
+        placeholder="Selecciona una categoría"
+        [style]="{'width':'100%'}"
+        appendTo="body">
+    </p-select>
+    
+    <small class="p-error block mt-1" *ngIf="submitted && !product.categoria_id">
+        Debes seleccionar una categoría.
+    </small>
+</div>
+
+        <div class="formgrid grid flex gap-2">
+            <div class="field col mb-3">
+                <label for="price">Precio</label>
+                <input type="number" pInputText id="price" [(ngModel)]="product.precio" />
+            </div>
+            <div class="field col mb-3">
+                <label for="quantity">Stock</label>
+                <input type="number" pInputText id="quantity" [(ngModel)]="product.stock" />
+<small class="p-error block mt-1" *ngIf="submitted && product.stock < 0">
+    El stock no puede ser negativo.
+</small>
+            </div>
+        </div>
+        
+        <div class="field mb-3">
+            <label for="img">URL de Imagen</label>
+            <input type="text" pInputText id="img" [(ngModel)]="product.imagen_url" placeholder="http://..." />
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<p-toast></p-toast>
